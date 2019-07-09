@@ -1,0 +1,94 @@
+/***************************** Android studio config ******************************/
+${PROJECT_SOURCE_DIR}/inc
+${PROJECT_SOURCE_DIR}/samples/*.c
+
+useHello.c (main)
+libHelloSLAM.c -> fft_shared
+libHelloSLAM
+CMakeLists.txt
+
+	set(CMAKE_C_STANDARD 11)
+	add_library( hello_shared SHARED libHelloSLAM.c)
+	add_executable( usefft useHello.c)
+	target_link_libraries( usefft hello_shared)
+
+main.c
+NE10_test_demo.c
+
+CMakeLists.txt
+	set(CMAKE_C_STANDARD 11)
+	add_library( fft_shared SHARED NE10_test_demo.c)
+	add_executable( usefft main.c)
+	target_link_libraries( usefft fft_shared)
+
+
+/***************************** build the library *******************************/
+mkdir build && cd build
+export ANDROID_NDK=/home/yy/libs/android-ndk-r16b
+export NE10_ANDROID_TARGET_ARCH=armv7
+cmake -DCMAKE_TOOLCHAIN_FILE=../android/android_config.cmake ..
+make
+
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/inc
+LOCAL_CFLAGS := -L
+LOCAL_LDLIBS := -lNE10
+
+/usr/bin/ld: skipping incompatible ./libNE10.a when searching for -lNE10
+/usr/bin/ld: cannot find -lNE10
+
+/************************ file to change in ne10 lib **************************/
+void test_fft_c2c_1d_int16() from module/dsp/test/test_suite_fft_int16.c
+void test_fft_r2c_1d_int16()
+
+void test_fft_c2c_1d_float32()
+void test_fft_r2c_1d_float32()
+
+void test_fft_c2c_1d_int32()
+void test_fft_r2c_1d_int32()
+
+change Android.mk and test_func.h
+add the method name from suite.c to former 2
+test/src/unit_test_common.c can change the log info
+
+
+
+use ne10_log() to save the log info
+
+
+/**************************
+ **about android log int C:
+*/************************
+	add LOCAL_LDLIBS    := -lm -llog after include $(CLEAR_VARS) in Andorid.mk
+
+#define LOG_TAG "NativeTAG"
+
+#define  LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
+
+#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
+
+#define  LOGD(...)  __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
+
+#define  LOGW(...)  __android_log_print(ANDROID_LOG_WARN, LOG_TAG, __VA_ARGS__)
+
+usage:
+	LOGD("kashifu");
+
+ne10_fft_c2c_1d_int16_c
+ne10_fft_c2c_1d_int16_neon
+ne10_fft_c2c_1d_int16_c
+ne10_fft_c2c_1d_int16_neon
+
+void ne10_fft_c2c_1d_int16_c (ne10_fft_cpx_int16_t *fout,
+                              		ne10_fft_cpx_int16_t *fin,
+                              		ne10_fft_cfg_int16_t cfg,
+                            	               ne10_int32_t inverse_fft,
+                            		  ne10_int32_t scaled_flag)
+0	0	
+1	0
+0	1
+1	1
+
+/**************************** vector mul ***************************/
+change MAX_VEC_COMPONENTS 
+
+
