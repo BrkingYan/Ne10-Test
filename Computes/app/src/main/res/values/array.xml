@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="N">
+        <item>256</item>
+        <item>512</item>
+        <item>1024</item>
+        <item>2048</item>
+        <item>4096</item>
+        <item>8192</item>
+        <item>16384</item>
+        <item>32768</item>
+        <item>65536</item>
+        <item>131073</item>
+        <item>262144</item>
+    </string-array>
+
+    <string-array name="Algorithm">
+        <item>JNI</item>
+        <item>Neon</item>
+    </string-array>
+</resources>
