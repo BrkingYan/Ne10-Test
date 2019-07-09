@@ -50,7 +50,8 @@ change Android.mk and test_func.h
 add the method name from suite.c to former 2
 test/src/unit_test_common.c can change the log info
 
-
+if your android project's function name is different 
+change the function name is ok
 
 use ne10_log() to save the log info
 
